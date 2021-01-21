@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <!-- For fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        
+        <!-- For external CSS -->
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        
+    <!-- For the main div box  -->
+    <div id="To-do">
+        <!-- for the image in front of heading -->
+        <img style="margin-top: 10px; height:50px; display:inline-block;" src="/images/Todo.png">
+        
+        <!-- For the heading of the app -->
+        <h1 style="display: inline-block; vertical-align: top;">TODO App</h1>
+        
+        <!-- For the div box asking user to fill the information -->
+        <div id="about-task">
+
+            <!-- for the top box containing Description and Task -->
+            <div id="top-description">
+
+                <!-- Asking the usert to enter Desciption  -->
+                <div id="description">
+
+                    <!-- for adding the task using post method -->
+                        <form id="add-form" action="/add-task" method="POST">
+
+                    <!-- For the description of the task -->
+                        <label for="Description">Description</label> 
+                        <input style="margin-top: 10px; color: black;" type="text" name="Description" id="Description" placeholder="Hey Buddy! Add you task" required>
+                    </div>    
+
+                    <!-- div box for the type of task -->
+                    <div id="task">
+
+                        <!-- For the options available for the task -->
+                        <label for="Task">Task</label>
+                        <select id="tasking" name="Task" required >
+                        <option disabled selected value> -- select a task -- </option>
+                        <option value="Gym">Gym</option>
+                        <option value="Meeting">Meeting</option>
+                        <option value="Grocery">Grocery</option>
+                        <option value="BillPayment">Bill Payment</option>
+                        <option value="Exam">Exam</option>
+                        <option value="Doctor">Doctor's visit</option>
+                        <option value="Movie">Movie</option>
+                        <option value="Others">Others</option>
+                        </select>
+                </div>
+        </div>
+            
+            <!-- Div box for the down description -->
+            <div id="down-description">
+                
+                <!--Div box for the date  -->
+                <div id="date">
+                    <label for="birthday">Due Date:</label>
+                    <input style="margin-top: 10px;" type="date" id="Duedate" value="jdskf" name="DueDate" required>
+                </div>
+
+                <!-- Div box for the time -->
+                <div id="time">
+                    <label for="appt">Add time:</label>
+                    <input style="margin-top: 10px;" type="time" id="appt" name="Time" required>
+                </div>
+            </div>
+            <!-- For the add-button -->
+           </a> <button id="add" type="submit" onclick="resetid()"><i class="fas fa-plus"></i> Add Task</button>
+
+            <!-- For the delete-button -->
+            <button id="delete" form="delete-form" type="submit"><i class="fas fa-trash"></i> Delete Task</button> 
+        </form>
+        <form id="updating" action="/update/" method="POST">
+            <input type="hidden" id="givenDesc" name="checking" value="">
+            <input type="hidden" id="givenTask" name="checking2" value="">
+            <input type="hidden" id="givenDueDate" name="checking3" value="">
+            <input type="hidden" id="givenTime" name="checking4" value="">
+       <button style="visibility: hidden;" value="" id="update" onclick="finalupdate()" type="submit"><i class="fas fa-sync-alt"></i> Update Task</button>
+        <!-- For the update-button -->
+    </form>
+        </div>
+
+        <!-- Div box for all the ouput of the task choosed -->
+        <div id="output">
+        
+        <!-- div box for list of the tasks available  -->
+        <div  id="All-tasks">
+            <ul>
+                <h2>Schedule</h2>
+                <li>
+                    <a href="/find-task/?Task=Gym">Gym</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=Movie">Movie</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=Meeting">Meeting</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=Grocery">Grocery</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=BillPayment">Bill Payments</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=Exam">Exam</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=Doctor">Doctor's visit</a>
+                </li>
+                <li>
+                    <a href="/find-task/?Task=Others">Others</a>
+                </li>
+                <li>
+                    <a href="/">Show All</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Div box containing tasks -->
+        <div id="tasks">
+                <% for(var i of tasks) {%>
+
+                <!-- Div box iniside which all the task will be printed -->
+                <div class="task-reminder">
+
+                    <!-- Div box containing description and task type -->
+                    <div class="parent-1">
+
+                        <!-- Div box containing description -->
+                        <div class="Description">
+                        
+                    <!-- For the delete form -->
+                    <form id="delete-form"  action="/delete-task" style="display: inline-block;" method="POST">
+
+                        <!-- For the checkbox -->
+                        <input  type="checkbox" class="checking" name="Description" value="<%= i._id %>">
+                        <%= i.Description %>
+                        </div>
+
+                        <!-- Div box containing task type -->
+                        <div class="task-type">
+                        <%= i.Task %>
+                        </div>
+                        <a href="#" style="margin-left:-80px" onclick="update('<%=i.Task%>','<%=i.Description%>','<%=i.DueDate%>','<%=i.Time%>','<%=i.id%>')"><i class="fas fa-edit"></i></a>
+                    </div>
+
+                    <!-- Div box containing Due-date and time -->
+                    <div class="parent-2">
+
+                        <!-- Div box containing due date -->
+                        <div class="DueDate">
+                        <p><i style="color:#E72C30;" class="fas fa-calendar"></i> <%= i.DueDate %></p>
+                        </div>&nbsp;&nbsp;
+
+                        <!-- Div box containing time -->
+                        <div class="Time">
+                        <p><i style="color: #E72C30;" class="fas fa-clock"></i> <%= i.Time %></p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            </form>
+            </div>
+        </div>
+        </div>
+
+        <!-- For the external js used -->
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>

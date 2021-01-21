@@ -1,0 +1,167 @@
+body{                                               /*For the body tag*/
+    background-color: lightblue ;
+    font-weight: bold;
+    background-image: url('../images/main_page.jpg');
+}
+#To-do{                                     /* To do app inside a div box */
+    text-align: center;
+    margin: auto;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px 10px 10px 10px; 
+    width: 40%;
+    height: auto;
+    background-image: url('../images/clock.gif'); 
+    background-size:cover;
+    box-shadow: 10px 10px 16px #000000;
+}
+
+h1{                                                /* For main heading of the todo list */
+    color:black;
+    /* border-bottom: 2px solid #EFEFEF; */
+    vertical-align: middle  ;
+}
+
+a{                                                 /* For all the anchor tag(hyperlink) */
+    color: black;
+    text-decoration: none;
+    transition: color 0.5s, border-bottom 4s;
+}
+
+a:hover{                                /* On hovering on any hyperlink */
+	color: white;
+}
+
+
+#about-task{                     /*information about to do app in a div box*/
+    margin: auto;
+    width: 97%;
+}
+
+#about-task>div{                 /* For child div present in about-task which are top-description & down-description */ 
+    display: flex; 
+    justify-content: space-between;
+}
+
+
+#top-description div{                    /*For all the div boxes present inside about-task*/
+    height: 2.5rem;
+    border: 2px solid #EFEFEF; 
+    border-radius: 5px 5px 5px 5px;
+    width: 50%;
+} 
+
+#down-description div{                    /*For all the div boxes present inside about-task*/
+    height: 2.5rem;
+    border: 2px solid #EFEFEF; 
+    border-radius: 5px 5px 5px 5px;
+    width: 50%;
+}
+
+#time{                                  /* For time as div box */
+    border-top: none;
+    border-left: none;
+ }
+
+#date{                                 /* For date as div box */
+   border-top: none; 
+}
+
+#task{                                 /* For task as div box */
+    border-left: none; 
+    margin-left: -4px;
+}
+
+
+input{                                          /* For all the input in page */
+    outline: none;
+    border: none; 
+    margin: auto;
+    background: transparent;
+    font-family: sans-serif;
+}
+
+select{                                       /* For selecting the options available for task */
+    height: 100%;
+    width: 8rem;
+    border-radius: 10px 10px 10px 10px;
+    outline: none;
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+}
+
+::placeholder{                                 /* For changing the color of all placeholers in page */
+    color: black;
+}
+
+
+button{                                       /*  For the buttons available as add or delete */
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 1.5rem;
+    background-color: white;
+    outline: none;
+}
+
+#add:hover{                                     /* On hovering on add button */
+    background-color:green;
+    color: white;
+}
+#delete:hover{                                     /* On hovering on delete button */
+    background-color: #E72C30;
+    color: white;
+}
+#update:hover{                                     /* On hovering on delete button */
+    background-color: blue;
+    color: white;
+}
+#output{                                           /*   For all the div boxes present in output */
+    display: flex;
+}
+
+#All-tasks{                /* div inside this list of all task which you want to see availble */
+    padding: 10px;
+}
+
+#All-tasks li{                        /*  For the list of tasks */
+    border-bottom: 1px solid black;
+    list-style:none;
+    margin-top: 15px;
+}
+
+#tasks{                                        /* Div box inside which all the tasks available will be printed */
+    display: inline-block;
+    width: 700px;
+    font-weight: bold;
+}
+ 
+.task-reminder{                               /* Task details will be present inside this div box */
+    border-bottom: 2px solid grey
+}
+.parent-1{                             /* For the upper details as name of the task and its type */
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+    margin-bottom: -50px;
+}
+.parent-2{                                  /* For the lower details as date and time of the task */
+    margin-bottom: -20px;
+    padding: 10px;
+    display: flex;
+}
+
+.task-type{                                    /* For styling the type of task */
+    background-color:#07C600;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    border-radius: 5px 5px 5px 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    border: 1px solid black;
+    text-shadow: -1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; 
+    height:15px;
+}
+
