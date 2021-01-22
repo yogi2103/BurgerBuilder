@@ -107,7 +107,7 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux>
-                <Modal show={this.state.orderable} modalClosed={this.cancelOrder}>
+                <Modal show={this.state.orderable} modalClosed={this.cancelOrder}>    {/* we will make it class based for shouldcomponentupdate */}
                     <OrderSummary 
                     ingredients={this.state.ingredients}
                     orderCanceled={this.cancelOrder}
