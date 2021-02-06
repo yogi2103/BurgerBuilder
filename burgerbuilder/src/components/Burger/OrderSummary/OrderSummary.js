@@ -22,7 +22,7 @@ class OrderSummary extends Component{
             </ul>
             <p>Continue to Checkout? <span>Your total bill is: ${this.props.totalPrice}</span></p>
             <Button btnType="Danger" clicked={this.props.orderCanceled}>CANCEL</Button>
-            <Button btnType="Success"clicked={this.props.orderContinued}>CONTINUE</Button>
+            <Button btnType="Success" clicked={this.props.orderContinued}>CONTINUE</Button>
         </Aux>
         );
     }
