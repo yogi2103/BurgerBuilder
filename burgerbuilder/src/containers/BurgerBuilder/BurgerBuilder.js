@@ -7,6 +7,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/WItherrorHandler/withErrorHandler';
 
 
 //WE ARE DECLARING IT OUT OF CLASS BECAUSE IT'S A CONSTANT
@@ -110,7 +111,7 @@ class BurgerBuilder extends Component {
             },
             deliveryMethod:'fastest'
         }
-        axios.post('/orders.json',order)
+        axios.post('/orders',order)
             .then(Response=>{
                 this.setState({loading:false,orderable:false});
                 console.log(Response);
@@ -157,4 +158,4 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder,axios);
