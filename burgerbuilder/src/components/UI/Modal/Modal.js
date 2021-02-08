@@ -6,7 +6,7 @@ class Modal extends Component{
 
     //these components are added so that we can optimize or reduce load-time of website by avoiding unnecessary rendering
     shouldComponentUpdate(nextProps,nextState){
-        if(nextProps.show!= this.props.show){
+        if(nextProps.show!= this.props.show || nextProps.children!=this.props.children){
             return true;    
         }
         return false;

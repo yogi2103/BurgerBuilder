@@ -5,6 +5,9 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
+import Spinner from '../../components/UI/Spinner/Spinner';
+
 
 //WE ARE DECLARING IT OUT OF CLASS BECAUSE IT'S A CONSTANT
 const INGREDIENT_PRICES={
@@ -28,7 +31,8 @@ class BurgerBuilder extends Component {
         },
         totalPrice:0,
         purchasable:false,
-        orderable:false
+        orderable:false,
+        loading:false
     }
 
     updatePurchaseState(ingredients){
@@ -96,6 +100,25 @@ class BurgerBuilder extends Component {
 
     continueOrder=()=>{
         alert('Madafaka! Have the best burger of your life meat good, cream good...');
+        this.setState({loading:true});
+        const order={
+            ingredients:this.state.ingredients,
+            price:this.state.totalPrice,
+            customer:{
+                name: 'Yogi',
+                email:'x@gmail.com'
+            },
+            deliveryMethod:'fastest'
+        }
+        axios.post('/orders.json',order)
+            .then(Response=>{
+                this.setState({loading:false,orderable:false});
+                console.log(Response);
+            })
+            .catch(err=>{
+                this.setState({loading:false,orderable:false});
+                console.log(err);
+            })
     }
 
     render () {
@@ -105,15 +128,20 @@ class BurgerBuilder extends Component {
         for(let key in disabledInfo){
             disabledInfo[key] = disabledInfo[key]<=0
         }
+        let orderSummary=<OrderSummary 
+            ingredients={this.state.ingredients}
+            orderCanceled={this.cancelOrder}
+            orderContinued={this.continueOrder}
+            totalPrice={this.state.totalPrice}
+            /> 
+        
+        if(this.state.loading){
+            orderSummary=<Spinner />
+        }
         return (
             <Aux>
                 <Modal show={this.state.orderable} modalClosed={this.cancelOrder}>    {/* we will make it class based for shouldcomponentupdate */}
-                    <OrderSummary 
-                    ingredients={this.state.ingredients}
-                    orderCanceled={this.cancelOrder}
-                    orderContinued={this.continueOrder}
-                    totalPrice={this.state.totalPrice}
-                    /> 
+                    {orderSummary}
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
