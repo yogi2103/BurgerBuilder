@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
+import axios from '../../../axios-orders';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 class ContactData extends Component{
     state={
         name:'',
@@ -20,7 +22,7 @@ class ContactData extends Component{
         this.setState({loading:true});
         const order={
             ingredients:this.props.ingredients,
-            price:this.props.totalPrice,
+            price:this.props.price,
             customer:{
                 name: 'Yogi',
                 email:'x@gmail.com'
@@ -31,6 +33,7 @@ class ContactData extends Component{
             .then(Response=>{
                 this.setState({loading:false,orderable:false});
                 console.log(Response);
+                this.props.history.push('/');
             })
             .catch(err=>{
                 this.setState({loading:false,orderable:false});
@@ -40,16 +43,22 @@ class ContactData extends Component{
     }
 
     render(){
-        return(
-            <div className={classes.ContactData}>
-                <h4>Enter your Contact Data</h4>
-                <form>
+        let form=(
+            <form>
                     <input className={classes.Input} type="text" name="name" placeholder="Your nemae"></input>
                     <input className={classes.Input} type="email" name="email" placeholder="Your mail"></input>
                     <input className={classes.Input} type="text" name="stree" placeholder="Stree"></input>
                     <input className={classes.Input} type="text" name="postal" placeholder="Postal code"></input>
                     <Button btnType="Success" clicked={this.orderHandler}>Order</Button>
                 </form>
+        );
+        if(this.state.loading){
+            form= <Spinner />;
+        }
+        return(
+            <div className={classes.ContactData}>
+                <h4>Enter your Contact Data</h4>
+                {form}
             </div>
         );
     }
