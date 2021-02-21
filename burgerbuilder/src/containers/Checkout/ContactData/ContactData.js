@@ -8,12 +8,35 @@ class ContactData extends Component{
         address:{
             street:'',
             postalCode:''
-        }
+        },
+        loading:false
     }
 
     orderHandler=(event)=>{
         event.preventDefault();     //otherwise this page will reload on cliking the order button
         console.log(this.props.ingredients);
+
+        alert('Madafaka! Have the best burger of your life meat good, cream good...');
+        this.setState({loading:true});
+        const order={
+            ingredients:this.props.ingredients,
+            price:this.props.totalPrice,
+            customer:{
+                name: 'Yogi',
+                email:'x@gmail.com'
+            },
+            deliveryMethod:'fastest'
+        }
+        axios.post('/orders.json',order)
+            .then(Response=>{
+                this.setState({loading:false,orderable:false});
+                console.log(Response);
+            })
+            .catch(err=>{
+                this.setState({loading:false,orderable:false});
+                console.log(err);
+            })
+
     }
 
     render(){
