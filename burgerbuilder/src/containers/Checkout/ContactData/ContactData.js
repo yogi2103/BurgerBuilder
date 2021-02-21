@@ -11,6 +11,11 @@ class ContactData extends Component{
         }
     }
 
+    orderHandler=(event)=>{
+        event.preventDefault();     //otherwise this page will reload on cliking the order button
+        console.log(this.props.ingredients);
+    }
+
     render(){
         return(
             <div className={classes.ContactData}>
@@ -20,7 +25,7 @@ class ContactData extends Component{
                     <input className={classes.Input} type="email" name="email" placeholder="Your mail"></input>
                     <input className={classes.Input} type="text" name="stree" placeholder="Stree"></input>
                     <input className={classes.Input} type="text" name="postal" placeholder="Postal code"></input>
-                    <Button btnType="Success">Order</Button>
+                    <Button btnType="Success" clicked={this.orderHandler}>Order</Button>
                 </form>
             </div>
         );
