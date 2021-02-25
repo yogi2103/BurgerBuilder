@@ -7,4 +7,4 @@ const order=(props)=>(
     </div>
 )
 
-export default Order;
+export default order;
