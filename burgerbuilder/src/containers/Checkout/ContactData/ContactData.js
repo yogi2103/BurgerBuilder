@@ -14,7 +14,11 @@ class ContactData extends Component{
                         type:'text',
                         placeholder:'Your name'
                     },
-                    value:''
+                    value:'',
+                    validation:{
+                        required:true
+                    },
+                    valid: false
                 },
                 email:{
                     elementType:'input',
@@ -22,7 +26,11 @@ class ContactData extends Component{
                         type:'email',
                         placeholder:'Your email'
                     },
-                    value:''
+                    value:'',
+                    validation:{
+                        required:true
+                    },
+                    valid: false
                 },
                 deliveryMethod:{
                     elementType:'select',
@@ -81,12 +89,25 @@ class ContactData extends Component{
 
     }
 
+    checkValidity(value,rules){
+        let isValid=false;
+        if(rules.required){
+            isValid=value.trim()!=='';
+        }
+
+        if(rules.minLength){
+            isValid= value.length >=rules.minLength;
+        }
+        return isValid;
+    }
+
     inputChangeHandler=(event,inputIdentifier)=>{
         console.log(event.target.value);
         const updatedOrderForm={...this.state.orderForm};   //it will not deep copy the all inside elements
 
         const updatedFormElement={...updatedOrderForm[inputIdentifier]};
         updatedFormElement.value=event.target.value;
+        updatedFormElement.valid=this.checkValidity(updatedFormElement.value,updatedFormElement.validation);
         updatedOrderForm[inputIdentifier]=updatedFormElement;
         this.setState({orderForm:updatedOrderForm});
 
@@ -109,6 +130,8 @@ class ContactData extends Component{
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig} 
                         value={formElement.config.value}
+                        shouldValidate={formElement.config.validation}
+                        invalid={!formElement.config.valid}
                         changed={(event)=>this.inputChangeHandler(event,formElement.id)}
                         />
                     })}
@@ -117,6 +140,7 @@ class ContactData extends Component{
                     <Input inputtype="input" type="text" name="stree" placeholder="Stree" />
                     <Input inputtype="input" type="text" name="postal" placeholder="Postal code" />
                     <Button btnType="Success" clicked={this.orderHandler}>Order</Button> */}
+                    <Button btnType="Success" clicked={this.orderHandler}>Order</Button>
                 </form>
         );
         if(this.state.loading){
